@@ -1,0 +1,71 @@
+@font-face {
+	font-family: 'Open Sans';
+	src: url('fonts/OpenSans-VariableFont_wdth,wght.ttf') format('truetype');
+	font-style: normal;
+	font-weight: 200 800;
+    font-stretch: 75% 100%;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Open Sans';
+	src: url('fonts/OpenSans-Italic-VariableFont_wdth,wght.ttf') format('truetype');
+	font-style: italic;
+	font-weight: 200 800;
+    font-stretch: 75% 100%;
+	font-display: swap;
+}
+
+:root {
+    --time: 200ms;
+    --max-inline-size: 60rem;
+    --gap: 2rem;
+    --inline-size: min(var(--max-inline-size), calc(100dvi - 2*var(--gap)));
+    --inline-padding: calc((100dvi - var(--gap) - var(--inline-size)) / 2);
+    --lh: 1.4;
+    --icon-size: 3rem;
+
+    --font-headings: "Open Sans", sans-serif;
+    --font-primary: "Open Sans", sans-serif;
+
+    --fs: clamp(1rem, 1rem + 4vmin, 1.5rem);                /* 16-24px */
+    --fs-lg: clamp(1.5rem, 1.5rem + 4vmin, 2rem);           /* 24-32px */
+    --fs-xl: clamp(2rem, 2rem + 4vmin, 2.5rem);             /* 32-40px */
+    --fs-xxl: clamp(3rem, 3rem + 4vmin, 4rem);              /* 40-48px */
+    --fs-huge: clamp(5rem, 4rem + 4vmin, 6rem);             /* 80-96px */
+    --fs-sm: clamp(.875rem, .875rem + 4vmin, 1.125rem);     /* 14-18px */
+    --fs-xs: clamp(.75rem, .75rem + 4vmin, 1rem);           /* 12-16px */
+
+    --fw-thin: 200;
+    --fw-light: 300;
+    --fw: 400;
+    --fw-semibold: 600;
+    --fw-bold: 700;
+    --fw-black: 800;
+
+    --link-line-width: 0.1em;
+
+    --black: hsl(0 0% 5%);
+    --white: hsl(0 0% 100%);
+    --blue: hsl(240 50% 50%);
+    --blue-light: hsl(240 60% 65%);
+    --red: hsl(0 80% 40%);
+    --gold: hsl(40 80% 50%);
+    --green: hsl(100 80% 40%);
+
+    --color-bg: var(--black);
+    --color-text: var(--white);
+    --color-accent: var(--blue);
+    --color-alert: var(--red);
+    --color-warning: var(--gold);
+    --color-success: var(--green);
+    --color-link: var(--color-accent);
+
+    --color-scheme: dark;
+}
+
+.light-mode {
+    --color-scheme: light;
+    --color-text: var(--black);
+    --color-bg: var(--white);
+}

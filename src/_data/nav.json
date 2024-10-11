@@ -1,0 +1,33 @@
+[
+    {
+        "name": "Home",
+        "url": "/",
+        "primary": false,
+        "footerColumn": "1"
+    },
+    {
+        "name": "About",
+        "url": "/about/",
+        "primary": true,
+        "footerColumn": "1"
+    },
+    {
+        "name": "Blog",
+        "url": "/blog/",
+        "primary": true,
+        "footerColumn": "1"
+    },
+    {
+        "name": "Contact",
+        "url": "/contact/",
+        "primary": true,
+        "footerColumn": "1"
+    },
+
+    {
+        "name": "Privacy",
+        "url": "/privacy/",
+        "primary": false,
+        "footerColumn": "1"
+    }
+]

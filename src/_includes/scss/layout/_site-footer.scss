@@ -1,0 +1,11 @@
+.site-footer {
+    background-color: var(--black);
+    color: var(--white);
+    padding-inline: var(--inline-padding);
+    padding-block-end: var(--gap);
+    border-block-start: 2px solid currentColor;
+    h2 {font-size: inherit; text-align: center; padding-block: var(--gap);}
+
+    ul {list-style: none;}
+}
+

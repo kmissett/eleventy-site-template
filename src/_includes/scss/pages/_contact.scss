@@ -1,0 +1,88 @@
+.contact-section {
+	font-family: var(--font-headings);
+	text-wrap: balance;
+
+	.contact-form-copy {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-around;
+	}
+
+	@media screen and (min-width: 50rem) {
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-columns: 1fr 1fr;
+		gap: var(--gap);
+	}
+}
+
+.contact-form {
+	display: flex;
+	flex-direction: column;
+	gap: calc(var(--gap)/2);
+	max-inline-size: var(--input-size);
+	
+	.error {
+		font-size: var(--fs-sm);
+		color: var(--color-alert); 
+	}
+
+	label {
+		display: block;
+		cursor: pointer;
+
+	}
+
+	.form-group {
+		display: flex;
+		flex-direction: column;
+		max-inline-size: 25rem;
+		
+	}
+	input,textarea {
+		padding: 0.5em;
+        border: 2px solid currentColor;
+		border-radius: 0.25em;
+		inline-size: 100%;
+		outline-offset: .125em;
+
+		&:hover, &:focus-visible {
+			outline: 0.2em solid var(--color-accent);
+			
+		}
+
+		&:invalid, &.is-invalid { outline: 0.2em solid var(--color-alert); }
+	}
+
+	textarea {
+		resize: vertical;
+		resize: block;
+		min-block-size: 8em;
+	}
+
+	.submit {
+		font-family: var(--font-headings);
+		font-weight: var(--fw-semibold);
+		font-size: var(--fs);
+		background-color: var(--color-accent);
+        border: 0;
+		border-radius: 0.25em;
+        color: var(--white);
+		text-transform: uppercase;
+		padding-inline: 0.5em;
+        padding-block: 0.25em;
+		inline-size: 100%;
+		max-inline-size: 24ch;
+		align-self: flex-start;
+		cursor: pointer;
+		transition: color var(--time) linear,
+					background-color var(--time) linear;
+
+		&:hover,
+		&:focus-visible {
+			background-color: var(--black);
+			outline: 1px solid var(--color-accent);
+		}
+		&[aria-disabled="true"] {background-color: hsl(0 0% 40%); cursor: not-allowed; text-decoration: line-through 3px;}
+	}
+}

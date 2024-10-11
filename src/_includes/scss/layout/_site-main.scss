@@ -1,0 +1,33 @@
+.site-main > * {
+    padding-block: 2rem;
+	padding-inline: var(--inline-padding);
+	    
+    ul {list-style: none;}
+
+	// link effect
+	p a {
+
+		text-decoration: none;
+		line-height: calc(1.1*var(--line-height));
+		background-image: linear-gradient(var(--color-link), var(--color-link));
+		background-repeat: no-repeat;
+		background-size: 100% var(--link-line-width);
+		background-position: bottom;
+		transition: background-size var(--time) ease-out;
+
+		&:hover, &:focus-visible {
+			background-size: 100% calc(100% - 0.25 * var(--link-line-width));
+			text-decoration: none;
+			color: var(--white);
+		}
+
+		// If a user sets a high contrast mode, background images disappear
+		@media (forced-colors: active) {
+			text-decoration: underline;
+		
+			&:hover, &:focus-visible {
+				outline: 2px solid currentColor; outline-offset: 0.1em;
+			}
+		}
+	}
+}

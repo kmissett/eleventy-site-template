@@ -1,0 +1,31 @@
+
+.hero {
+    font-family: var(--font-headings);
+    position: relative;
+    overflow: hidden;
+}
+
+.page-title {
+    font-size: var(--fs-huge);
+
+}
+
+/* Hero image fills entire background, fixed-attachment */
+.bg-img {
+
+    min-block-size: 50vh; 
+    padding-inline: 0.5em;
+    padding-block: 1em;
+    color: var(--white);
+
+    background-image: var(--bg-image),
+                      linear-gradient(var(--color-accent), var(--color-accent));
+    background-blend-mode: multiply;
+    background-attachment: fixed;
+    background-size: cover;
+    background-position: center;
+    display: grid;
+    place-items: center;
+
+    text-align: center;
+}

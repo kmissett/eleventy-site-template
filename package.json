@@ -1,0 +1,27 @@
+{
+  "name": "site-template_v2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:eleventy": "eleventy",
+    "watch:eleventy": "eleventy --incremental --serve",
+    "build:sass": "sass --style=compressed --no-source-map src/_includes/scss:public",
+    "watch:sass": "sass --style=compressed --no-source-map --watch src/_includes/scss:public",
+    "build": "npm-run-all build:*",
+    "start": "npm-run-all build:sass --parallel watch:*"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "type": "module",
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "cross-env": "^7.0.3",
+    "dotenv": "^16.4.5",
+    "html-minifier-terser": "^7.2.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.79.5",
+    "terser": "^5.34.1"
+  }
+}

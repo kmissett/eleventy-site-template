@@ -1,0 +1,97 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {min-block-size: 100dvh;}
+html { 
+    font-size: 100%; 
+    color-scheme: var(--color-scheme);
+    background-color: var(--black);
+}
+body {
+    position: relative;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    
+    font-family: var(--font-primary);
+    font-weight: var(--fw);
+    font-stretch: condensed;
+    font-size: var(--fs);
+    line-height: var(--lh);
+}
+
+
+/***** Typography *****/
+h1,h2,h3,h4,h5,h6 {
+    font-family: var(--font-headings);
+    font-weight: var(--fw);
+    line-height: 1;
+    text-wrap: balance;
+}
+
+h1        {font-size: var(--fs-huge);}
+h2        {font-size: var(--fs-xxl);}
+h3        {font-size: var(--fs-xl);}
+h4,h5,h6  {font-size: var(--fs);}
+
+ol, ul {list-style-position: inside;}
+
+b, strong {font-weight: var(--fw-bold);}
+cite, i, em {font-style: italic;}
+
+cite em {font-weight: var(--fw-bold);}
+
+p + p { margin-block-start: 1em; }
+
+input, textarea {font: inherit;}
+
+sub, sup {font-size: var(--fs-xxs);}
+
+/***** Links and Buttons *****/
+a { 
+    color: currentColor;
+
+    text-decoration: none;
+    &:hover, &:focus-visible { text-decoration: underline; }
+}
+
+button {
+    display: inline-block;
+    vertical-align: middle;
+    border: none;
+    background: none;
+    cursor: pointer;
+    overflow: hidden;
+    color: inherit;
+    font: inherit;
+}
+
+
+/***** Icons and SVG *****/
+.icon {
+    inline-size: var(--icon-size);
+    aspect-ratio: 1;
+    display: inline-block;
+    color: inherit;
+}
+
+svg {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    pointer-events: none;
+    fill: currentColor;
+}
+
+/***** Embedded content *****/
+img, video {
+    display: block; 
+    max-inline-size: 100%;
+}
+
+
+
+/***** Javascript Utility Classes *****/
+.display-none { display: none; }

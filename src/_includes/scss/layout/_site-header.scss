@@ -1,0 +1,41 @@
+.site-header {
+    --icon-size: 2.5rem;
+    padding-block: 1rem;
+    padding-inline: var(--inline-padding);
+    background-color: inherit;
+    border-block-end: 2px solid var(--color-text);
+    font-family: var(--font-headings);
+    
+    position: sticky; 
+    inset-block-start: 0;
+
+    display: flex;
+    gap: var(--gap);
+    align-items: center;
+    z-index: 1;
+
+}
+
+.site-title {
+    margin-inline-end: auto;
+}
+
+.header-nav {
+    display: none;
+    ul {
+        display: flex;
+        list-style-type: none;
+        gap: var(--gap);
+    }
+}
+
+.site-header-buttons {
+    display: flex;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 35rem) {
+    .site-header {position: static;}
+    .header-nav {display: block;}
+}
+
