@@ -30,11 +30,11 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addPassthroughCopy("src/files")
 
 	// don't copy passthrough files on serve (only on build or watch)
-  // eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
+  	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
 
 	// Transforms
-	eleventyConfig.addTransform("htmlmin", transforms.htmlminify)
+	eleventyConfig.addTransform("htmlmin", transforms.htmlMinify)
 
 	// Bundle and minify JS files
 
