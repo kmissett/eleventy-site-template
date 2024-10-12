@@ -1,5 +1,6 @@
 import htmlmin from "html-minifier-terser"
 
+
 // from https://www.11ty.dev/docs/transforms/#minify-html-output
 const htmlMinify = (content, path) => {
 	if(path && path.endsWith(".html")) {
@@ -13,7 +14,4 @@ const htmlMinify = (content, path) => {
 	return content
 }
 
-
-export default {
-	htmlMinify
-}
+export default {htmlMinify}

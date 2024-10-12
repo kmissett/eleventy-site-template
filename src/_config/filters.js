@@ -1,17 +1,5 @@
 import { minify } from "terser"
 
-// Adapted from https://moosedog.io/posts/clean-configuration-file-in-eleventy.html
-const jsMinifier = async function(code, callback) {
-  try {
-    const minified = await minify(code)
-    callback(null, minified.code)
-  } catch (err) {
-    console.error("Terser error: ", err)
-    // Fail gracefully
-    callback(null, code)
-  }
-}
-
 // Adapted from https://www.hawksworx.com/blog/adding-search-to-a-jamstack-site/
 const squash = text => {
 	let content = new String(text).toLowerCase();
@@ -37,4 +25,16 @@ const squash = text => {
 	return result
 }
 
-export default {jsMinifier, squash}
+// Adapted from https://moosedog.io/posts/clean-configuration-file-in-eleventy.html
+const jsMinify = async function(code, callback) {
+	try {
+		const minified = await minify(code)
+		callback(null, minified.code)
+	} catch (err) {
+		console.error("Terser error: ", err)
+		// Fail gracefully
+		callback(null, code)
+	}
+}
+
+export default {squash, jsMinify}

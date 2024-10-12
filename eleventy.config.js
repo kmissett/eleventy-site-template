@@ -18,7 +18,7 @@ export default async function(eleventyConfig) {
 
 	// filters
 	eleventyConfig.addFilter("squash", filters.squash)
-	eleventyConfig.addNunjucksAsyncFilter("jsmin", filters.jsMinifier)
+	eleventyConfig.addNunjucksAsyncFilter("jsmin", filters.jsMinify)
 
 	// shortcodes
 	eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`)
@@ -34,13 +34,11 @@ export default async function(eleventyConfig) {
 
 
 	// Transforms
+	// TODO: Bundle and minify JS files
 	eleventyConfig.addTransform("htmlmin", transforms.htmlMinify)
 
 	// Layout aliases
 	eleventyConfig.addLayoutAlias("base", "layouts/base.njk");
-
-
-	// TODO: Bundle and minify JS files
 
 	// general config
 	return {
