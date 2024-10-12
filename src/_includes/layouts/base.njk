@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if pageID !== "home" %}{{pageTitle}} - {% endif %}{{ meta.title }}</title>
+    <base href="{{meta.baseURL}}">
+    <link rel="canonical" href="{{ meta.baseURL + page.url }}" />
+    {% include "partials/site-opengraph.njk" %}
+
+    <link rel="stylesheet" href="{{"/styles.css" | url}}">
+    <meta name="generator" content="{{ eleventy.generator }}">
+    <meta name="description" content="{{description or meta.description}}">
+    
+</head>
+<body class="{{pageID}}-page">
+<a class="skip-link" id="skip-link" href="#{{pageID}}">Skip to main content</a>
+{% include "partials/site-header.njk" %}
+
+<main class="site-main {{pageID}}-main" id="{{pageID}}">
+{% set location="main" %}
+<section class="section hero-section {{pageID}}-hero-section">
+    <h1 id="page-title" class="page-title {{pageID}}-title">{{pageTitle if pageTitle else meta.title}}</h1>
+    {% if heroImage %}<img class="hero-image" src="images/{{heroImage}}" alt="{{heroImageDescription}}" />{% endif %}
+</section>
+
+{% block main %}
+{{ content | safe }}
+{% endblock %}
+</main>
+
+{% include "partials/site-footer.njk" %}
+{% include "partials/site-sidebar.njk" %}
+</body>
+</html>

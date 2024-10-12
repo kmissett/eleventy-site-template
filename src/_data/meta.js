@@ -4,7 +4,6 @@ export const description = "Site description"
 export const favicon = "images/logo.svg"
 export const logo = "images/logo.svg"
 export const baseURL = process.env.BASE_URL
-export const language = "en-US"
 export const author = {
     name:  process.env.SITE_AUTHOR || "Site author",
     email: process.env.EMAIL || "abc@def.com",

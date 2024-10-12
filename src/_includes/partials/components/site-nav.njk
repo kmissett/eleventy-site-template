@@ -1,0 +1,10 @@
+<nav class="{{location}}-nav" aria-label="Site {{location}}">
+    <ul role="list" id="{{location}}-nav-items" class="{{location}}-nav-items">
+        {% for item in nav %}
+        {% if ((location === "header") and (item.primary)) or (location !== "header") %}
+        <li{% if location === "footer" %} data-column="{{item.footerColumn}}"{% endif %}>
+            <a href="{{item.url}}" class="{{location}}-nav-item"{% if item.url === page.url %} aria-current="page" data-state="active"{% endif %}>{{item.name}}</a></li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+</nav>

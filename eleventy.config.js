@@ -36,8 +36,11 @@ export default async function(eleventyConfig) {
 	// Transforms
 	eleventyConfig.addTransform("htmlmin", transforms.htmlMinify)
 
-	// Bundle and minify JS files
+	// Layout aliases
+	eleventyConfig.addLayoutAlias("base", "layouts/base.njk");
 
+
+	// TODO: Bundle and minify JS files
 
 	// general config
 	return {
@@ -57,7 +60,7 @@ export default async function(eleventyConfig) {
 
 		dir: {
 			input: "src",
-			output: "public"
+			output: "public",
 		}
 	}
 }

@@ -1,0 +1,21 @@
+{% set desc = description or meta.description %}
+{% set currentURL = meta.baseURL + page.url %}
+
+{# OpenGraph #}
+<meta property="og:site_name" content="{{ meta.title }}" />
+<meta property="og:title" content="{{ pageTitle }}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{ currentURL }}" />
+<meta property="og:description" content="{{ desc }}" />
+{% if socialImage %}
+<meta property="og:image" content="{{ socialImage }}" />
+<meta property="og:image:alt" content="Page image for {{ site.name }}" />    
+{% endif %}
+
+{# Twitter #}
+<meta name="twitter:description" content="{{ desc }}" />
+{% if socialImage %}
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:image" content="{{ socialImage }}" />
+<meta name="twitter:image:alt" content="Page image for {{ site.name }}" />
+{% endif %}
