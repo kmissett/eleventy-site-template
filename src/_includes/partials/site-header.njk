@@ -1,9 +1,9 @@
 {% set location="header" %}
 <header class="site-header">
-    <a href="/" class="site-title"><span class="sr-only">Home</span>⭐</a>
+    <a href="/" class="site-title"><span class="sr-only">Home</span>{% include "icons/logo.svg" %}</a>
     
     {% include "partials/components/site-nav.njk" %}
 
-    <button type="button" class="icon open-sidebar-button" aria-label="Open navigation" aria-controls="sidebar-nav-list" aria-expanded="false"><span aria-hidden="true">🍔</button>
+    <button type="button" class="icon open-sidebar-button" aria-label="Open navigation" aria-controls="sidebar-nav-list" aria-expanded="false"><span aria-hidden="true">{% include "icons/menu.svg" %}</span></button>
 
 </header>

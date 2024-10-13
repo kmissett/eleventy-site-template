@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <path fill-rule="evenodd" id="orbit" d="M1,49.9 A48,20,0,1,1,1,50 M3,48.9 A46,17,0,1,1,3,49" />
+  <use href="#orbit" transform="rotate(60,50,50)" />
+  <use href="#orbit" transform="rotate(-60,50,50)"/>
+  <circle cx="50" cy="50" r="5" />
+</svg>

@@ -1,0 +1,5 @@
+<svg viewBox="-12 -12 24 24">
+    <rect width="100%" height="100%" x="-12" y="-12" fill="lightblue"/>
+    <path d="M9,-6v12h-18v-15h15l-1,1h-13v13h16v-10" />
+    <path transform="translate(4,-4) rotate(45)" d="M-.71,2v-10l-2.82,2.82l-1,-1l4.53,-4.53l4.53,4.53l-1,1l-2.82,-2.82v10" />
+</svg>
