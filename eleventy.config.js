@@ -18,7 +18,6 @@ export default async function(eleventyConfig) {
 
 	// filters
 	eleventyConfig.addFilter("squash", filters.squash)
-	eleventyConfig.addNunjucksAsyncFilter("jsmin", filters.jsMinify)
 
 	// shortcodes
 	eleventyConfig.addShortcode("year", () => `${new Date().getFullYear()}`)
@@ -32,10 +31,9 @@ export default async function(eleventyConfig) {
 	// don't copy passthrough files on serve (only on build or watch)
   	// eleventyConfig.setServerPassthroughCopyBehavior("passthrough");
 
-
 	// Transforms
-	// TODO: Bundle and minify JS files
 	eleventyConfig.addTransform("htmlmin", transforms.htmlMinify)
+	eleventyConfig.addTransform("jsmin", transforms.jsMinify)
 
 	// Layout aliases
 	eleventyConfig.addLayoutAlias("base", "layouts/base.njk");
@@ -44,12 +42,7 @@ export default async function(eleventyConfig) {
 	return {
 		
 		// Control which files Eleventy will process
-		templateFormats: [
-			"md",
-			"njk",
-			"html",
-			"liquid",
-		],
+		templateFormats: ["md", "njk", "html", "liquid"],
 
 		// pre-process files with njk
 		markdownTemplateEngine: "njk",
