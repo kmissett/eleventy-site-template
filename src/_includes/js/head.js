@@ -19,6 +19,8 @@ function changeColorMode() {
     currentColorMode === "dark" ? setColorMode("light") : setColorMode("dark")
 }
 
-setColorMode(getColorMode())
-const colorModeToggle = document.querySelectorAll('.color-mode-toggle')
-colorModeToggle.forEach(element => { element.addEventListener('click', changeColorMode)})
+document.addEventListener("DOMContentLoaded", (event) => {
+    setColorMode(getColorMode())
+    const colorModeToggle = document.querySelectorAll('.color-mode-toggle')
+    colorModeToggle.forEach(element => { element.addEventListener('click', changeColorMode)})
+})

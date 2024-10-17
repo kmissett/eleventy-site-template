@@ -7,8 +7,9 @@
 html, body {min-block-size: 100dvh;}
 html { 
     font-size: 100%; 
-    color-scheme: var(--color-scheme);
+    color-scheme: var(--color-scheme, dark);
     background-color: var(--black);
+
 }
 body {
     position: relative;
@@ -20,6 +21,7 @@ body {
     font-stretch: condensed;
     font-size: var(--fs);
     line-height: var(--lh);
+    transition: background-color var(--time);
 }
 
 
