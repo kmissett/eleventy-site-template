@@ -1,6 +1,6 @@
 {% set location="sidebar" %}
 <aside class="site-sidebar {{pageID}}-sidebar" id="site-sidebar" aria-expanded="false">
-    <button class="button icon close-sidebar-button" aria-label="Close sidebar"><span aria-hidden="true">❎</span></button>
+    <button class="button icon close-sidebar-button" aria-label="Close sidebar"><span aria-hidden="true">{% include "icons/close.svg" %}</span></button>
     <section class="sidebar-section sidebar-primary">
         {% include "partials/components/site-nav.njk" %}
     </section>

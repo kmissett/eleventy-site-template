@@ -1,0 +1,36 @@
+---
+layout: "layouts/base.njk"
+pageTitle: "Contact"
+pageID: "contact"
+mainTitle: "Contact"
+---
+
+<p class="noscript">This form requires Javascript. If you cannot enable Javascript, and want to contact me, please email<span id="botblocker"></span>.</p>
+
+<!-- form constructed to work with Jabwn Forms: https://formsapi.jabwn.com/ -->
+<form class="site-contact">
+    <h2 id="disabledReason">The form will enable submission once all fields are filled in, and the email is valid. Current mode is {{process.env.DEV_MODE}}</h2>
+    <input type="hidden" name="_subject" value="New Form Submitted" />
+    <input type="hidden" name="_replyto" value="%email" />
+    <input type="hidden" name="_after" value="{{meta.baseURL}}thanks/" />
+    <input type="hidden" name="_honey" value="" style="display:none" />
+    <input type="hidden" name="_valid[name]" value="required" />
+    <input type="hidden" name="_valid[email]" value="required|valid_email" />
+    <input type="hidden" name="_valid[message]" value="required" />
+    <div class="form-group name-group">
+        <label class="label" for="name">Name:</label>
+        <input type="text" name="name" id="name"/>
+        <p class="error"></p>
+    </div>
+    <div class="form-group email-group">
+        <label class="label email-label" for="email">Email:</label>
+        <input type="email" name="email" id="email"/>
+        <p class="error"></p>
+     </div>
+    <div class="form-group message-group">
+        <label class="label message-label" for="message">Message:</label>
+        <textarea name="message" id="message"></textarea>
+        <p class="error"></p>
+    </div>
+    <button class="submit" type="submit" aria-disabled="true" aria-describedby="disabledReason">Contact Me</button>
+</form>
