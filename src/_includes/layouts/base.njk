@@ -11,13 +11,14 @@
     <link rel="stylesheet" href="{{"/styles.css" | url}}">
     <meta name="generator" content="{{ eleventy.generator }}">
     <meta name="description" content="{{description or meta.description}}">
-    <script type="module" src="scripts.js"></script>
+    <script type="module" src="{{"/scripts.js" | url}}"></script>
+    <script>{% include "js/head.js" %}</script>
 </head>
 <body class="{{pageID}}-page">
 <a class="skip-link" id="skip-link" href="#{{pageID}}">Skip to main content</a>
 {% include "partials/site-header.njk" %}
 
-<main class="site-main {{pageID}}-main" id="{{pageID}}">
+<main class="site-main {{pageID}}-main" id="{{pageID}}" tabindex="-1">
 {% set location="main" %}
 <section class="section hero-section {{pageID}}-hero-section">
     <h1 id="page-title" class="page-title {{pageID}}-title">{{pageTitle if pageTitle else meta.title}}</h1>
