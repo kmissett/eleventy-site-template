@@ -17,6 +17,7 @@ export default async function(eleventyConfig) {
 	eleventyConfig.addCollection("tagsList", collections.getTagsList)
 
 	// filters
+	eleventyConfig.addFilter("postDate", filters.postDate)
 	eleventyConfig.addFilter("squash", filters.squash)
 
 	// shortcodes

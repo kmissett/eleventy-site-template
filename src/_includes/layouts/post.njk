@@ -1,0 +1,26 @@
+{% extends "layouts/base.njk" %}
+{% set comma = joiner() %}
+{% set previousPost = collections.publicPosts | getPreviousCollectionItem %}
+{% set nextPost = collections.publicPosts | getNextCollectionItem %}
+
+
+{% block main %}
+<article class="post" aria-labelledby="page-title">
+    <header class="post-header">
+        {# <p class="date">Posted on {{publishedDate.toLocaleDateString()}}</p> #}
+        <p class="date">Posted on {{page.date | postDate}}</p>
+        <p class="tags">Tags: {% for tag in tags %}{{comma()}} <a href="/category/{{tag}}/" class="tag">{{ tag }}</a>{% endfor %}</p>
+    </header>
+    {{content | safe }}
+    <footer class="post-footer">
+        {% if previousPost or nextPost %}
+        <nav class="post-navigation">
+            <ul>
+                {% if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.pageTitle }}</a></li>{% endif %}
+                {% if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.pageTitle }}</a></li>{% endif %}
+            </ul>
+        </nav>
+        {% endif %}
+    </footer>
+</article>
+{% endblock %}

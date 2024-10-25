@@ -1,3 +1,9 @@
+import {DateTime} from "luxon"
+
+const postDate = dateObj => {
+	return DateTime.fromJSDate(dateObj).toLocaleString()
+}
+
 // Adapted from https://www.hawksworx.com/blog/adding-search-to-a-jamstack-site/
 const squash = text => {
 	let content = new String(text).toLowerCase();
@@ -23,4 +29,4 @@ const squash = text => {
 	return result
 }
 
-export default {squash}
+export default {postDate, squash}
