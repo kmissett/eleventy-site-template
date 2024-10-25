@@ -14,7 +14,7 @@ export default async function(eleventyConfig) {
 	// collections
 	eleventyConfig.addCollection("posts", collections.getAllPosts)
 	eleventyConfig.addCollection("publicPosts", collections.getPublicPosts)
-	eleventyConfig.addCollection("tagsList", collections.tagsList)
+	eleventyConfig.addCollection("tagsList", collections.getTagsList)
 
 	// filters
 	eleventyConfig.addFilter("squash", filters.squash)

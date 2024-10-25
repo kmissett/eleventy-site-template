@@ -5,10 +5,10 @@ const getAllPosts = collection => {
 const getPublicPosts = collection => {
 	const now = new Date()
 	const posts = collection.getFilteredByGlob("./src/blog/*.md")
-	return posts.filter(post => post.data.publish && post.data.date < now)
+	return posts.filter(post => !post.data.draft && post.data.date < now)
 }
 
-const tagsList = collection => {
+const getTagsList = collection => {
 	const tagsSet = new Set()
 	collection.getAll().forEach( item => {
 			if (!item.data.tags) return
@@ -18,4 +18,4 @@ const tagsList = collection => {
 	return Array.from(tagsSet).sort()
 }
 
-export default {getAllPosts, getPublicPosts, tagsList}
+export default {getAllPosts, getPublicPosts, getTagsList}
