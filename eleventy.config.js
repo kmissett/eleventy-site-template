@@ -10,7 +10,11 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight"
 export default async function(eleventyConfig) {
 
 	// plugins
-	eleventyConfig.addPlugin(syntaxHighlight)
+	eleventyConfig.addPlugin(syntaxHighlight, {
+		preAttributes: {
+			tabindex: 0,
+		}
+	})
 
 	// add watch targets
 	eleventyConfig.addWatchTarget("./src/_includes/scss")

@@ -1,10 +1,10 @@
 const getAllPosts = collection => {
-	return collection.getFilteredByGlob("./src/blog/*.md")
+	return collection.getFilteredByGlob("./src/blog/*")
 }
 
 const getPublicPosts = collection => {
 	const now = new Date()
-	const posts = collection.getFilteredByGlob("./src/blog/*.md")
+	const posts = collection.getFilteredByGlob("./src/blog/*")
 	return posts.filter(post => !post.data.draft && post.data.date < now)
 }
 

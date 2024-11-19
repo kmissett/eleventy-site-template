@@ -1,5 +1,5 @@
 /**
- * a11y-dark theme for JavaScript, CSS, and HTML
+ * Adapted from a11y-dark theme for JavaScript, CSS, and HTML by ericwbailey
  * Based on the okaidia theme: https://github.com/PrismJS/prism/blob/gh-pages/themes/prism-okaidia.css
  * @author ericwbailey
  */
@@ -10,10 +10,16 @@ pre[class*="language-"] {
 	background: none;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
 	text-align: left;
-	white-space: pre;
+	/* white-space: pre; */
+	white-space: pre-wrap;
 	word-spacing: normal;
+	/*
 	word-break: normal;
-	word-wrap: normal;
+	word-wrap: normal; 
+	*/
+	word-break:break-all;
+	word-wrap:break-word;
+	overflow-wrap:anywhere;
 	line-height: 1.5;
 
 	-moz-tab-size: 4;
@@ -29,9 +35,12 @@ pre[class*="language-"] {
 /* Code blocks */
 pre[class*="language-"] {
 	padding: 1em;
-	margin: 0.5em 0;
-	overflow: auto;
+	/* 
+	margin: 0.5em 0; 
 	border-radius: 0.3em;
+	*/
+	margin: 0;
+	overflow: auto;
 }
 
 :not(pre) > code[class*="language-"],
