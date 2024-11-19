@@ -5,7 +5,12 @@ import collections from "./src/_config/collections.js"
 import filters from "./src/_config/filters.js"
 import transforms from "./src/_config/transforms.js"
 
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight"
+
 export default async function(eleventyConfig) {
+
+	// plugins
+	eleventyConfig.addPlugin(syntaxHighlight)
 
 	// add watch targets
 	eleventyConfig.addWatchTarget("./src/_includes/scss")
