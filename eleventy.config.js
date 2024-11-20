@@ -61,7 +61,6 @@ export default async function(eleventyConfig) {
 
 		dir: {
 			input: "src",
-			output: "public",
 		}
 	}
 }
