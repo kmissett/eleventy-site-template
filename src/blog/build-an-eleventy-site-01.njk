@@ -7,17 +7,17 @@ series: "building-an-eleventy-site"
 draft: false
 hasCodeBlock: true
 ---
-
-<p>Hello, and welcome to the first post in a series, detailing how I built this site in <a href="https://www.11ty.dev/">Eleventy</a> 3.0. There are many amazing articles and tutorials out there, showing how to do all this, but I wanted to add my voice to the chorus. Also, I wanted to collect some of the best tips I've learned (and I'll do my best to give credit to those who inspired me).</p>
+<section aria-label="Intro">
+<p>Hello, and welcome to the first post in a series, detailing how I built this site in <a href="https://www.11ty.dev/">Eleventy</a> 3.0. While there are already amazing articles and tutorials out there, I wanted to add my voice to the chorus. Also, I wanted to collect some of the best tips I've learned (and I'll do my best to give credit to those who inspired me).</p>
 
 <p>OK, that's enough preamble. Let's skip to the recipe!</p>
-
+<section>
 <section aria-labelledby="install-eleventy">
 	<h2 id="install-eleventy" tabindex="0">Step 1: Install Eleventy</h2>
 
 	<p>We're going to install Eleventy using <a href="https://nodejs.org/">Node.js</a>, so be sure you have that already. I prefer using the <a href="https://nodejs.org/en/download/package-manager">package manager</a> in the command line to do this, but there are many ways, so pick your preference. Note that Node also includes <abbr>NPM</abbr> (Node Package Manager), which we'll be using a lot.</p>
 
-	<p>Once we have Node and <abbr>NPM</abbr> installed, we'll follow steps 1 through 3 in the Eleventy <a href="https://www.11ty.dev/docs/">Getting Started</a> guide; for convenience, I'll list them here:</p>
+	<p>Now we follow steps 1 through 3 in the Eleventy <a href="https://www.11ty.dev/docs/">Getting Started</a> guide:</p>
 	
 	<p>First, create a directory somewhere on your computer where your site will live. I'm calling this "eleventy-site," but you can name it whatever you want. Navigate into that directory in your terminal, and then input the following:</p>
 	
@@ -31,19 +31,19 @@ npx @11ty/eleventy
 	{% endhighlight %}
 	</div>
 
-<p>Let's talk through these four lines. The first sets up a basic project in the folder, and generates a file named <code>package.json</code>. This is essentially the manifest for your project. It shows things such as what packages are installed and what scripts you can run. As we make changes to our project, certain things in this file will change automatically; other things we'll change manually. More on this down the road. We've added the <code>-y</code> flag to simplify the process: if we don't, the initializer will ask us lots of questions about things we can just change later anyway.</p>
+<p>Let's talk through these four lines. The first sets up a basic project in the folder, and generates a file named package.json. This file shows us, for instance, what packages we installed and what scripts we can run. As we go along, this file will change automatically, but we will make some changes ourselves. More on this down the road. The <code>-y</code> flag skips by default lots of questions about things we can change later anyway.</p>
 
 <p>The second line tells <code>package.json</code> that all <abbr>JS</abbr> 
 (JavaScript) files in this project will be of type "module." What that means is that we can use the most current <abbr>JS</abbr> structure and syntax.</p>
 
-<p>That third command installs the latest version of Eleventy. When we do this, we create a folder named <code>node_modules</code>, and a file called <code>package-lock.json</code>. The folder is basically the location for all installed packages, and the file is the detailed list of those packages and all their dependencies. We don't ever have to interact with either of those, and in fact, we never should.</p>
+<p>That third command installs the latest version of Eleventy. When we do this, we create a folder named <code>node_modules</code>, which is where packages get installed. We also get a list of those packages and their dependencies, called <code>package-lock.json</code>. We don't ever have to interact with either of those, and in fact, we never should.</p>
 
-<p>The final command runs Eleventy to make sure everything installed properly. It uses something called <abbr>NPX</abbr> (Node Package eXecute), which is a way to run a Node package without installing it. In general, we won't be using <abbr>NPX</abbr> much, as we'll be writing custom scripts to do the things we want to do.</p>
+<p>The final command runs Eleventy to make sure everything installed properly. It uses <abbr>NPX</abbr> (Node Package eXecute), which is a way to run a Node package without installing it. In general, we won't be using <abbr>NPX</abbr> much, as we'll be writing custom scripts to do the things we want to do.</p>
 </section>
 
 <section aria-labelledby="create-config-file">
 	<h2 id="create-config-file" tabindex="0">Step 2: Project Structure and Config File</h2>
-	<p>Next, I create a directory called <code>src</code>, and within that, create the following folder structure. We won't be using a lot of this yet, but we may as well set it up now:</p>
+	<p>Make a directory called <code>src</code>, and create the following folder structure in there. We won't be using a lot of this yet, but we may as well set it up now:</p>
 
 <div class="code-block" aria-labelledby="codeblock-02">
 		<header class="code-block-header" id="codeblock-02">Folder structure</header>
@@ -64,7 +64,7 @@ src
 	{% endhighlight %}
 	</div>
 
-	<p>Next, we create a new file, in our directory root, called <code>eleventy.config.js</code>. This will allow us to add a lot of functionality to our site. For more information about this, please visit <a href="https://11ty.dev/docs/config">Eleventy's documentation</a> about this config file. We'll keep adding to this; for now, let's just set up the basics:</p>
+	<p>Next, create a new file in our root directory, called <code>eleventy.config.js</code>. This will allow us to add a lot of functionality to our site. For more information about this, please visit <a href="https://11ty.dev/docs/config">Eleventy's documentation</a> about this config file. We'll keep adding to this; for now, let's just set up the basics:</p>
 
 	<div class="code-block" aria-labelledby="codeblock-03">
 		<header class="code-block-header" id="codeblock-03">eleventy.config.js</header>
@@ -94,7 +94,7 @@ export default async function(eleventyConfig) {
 	{% endhighlight %}
 	</div>
 
-	<p>There are some opinionated choices in here. For example, Eleventy's default input directory is the root, but I prefer putting everything in a <code>src</code> folder, just to keep things a bit more separated. I'm also more of a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> fan, so I'm changing the default templating engine from <a href="https://shopify.github.io/liquid/">Liquid</a>. (Don't worry if these terms don't make sense yet. The point for now is that Eleventy lets us customize things however we want, and you can certainly make different choices if you prefer.)</p>
+	<p>There are some opinionated choices in here. For example, Eleventy's default input directory is the root, but I prefer using a <code>src</code> folder. This keeps the input and output files more separate. I'm also more of a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> fan, so I'm changing the default templating engine from <a href="https://shopify.github.io/liquid/">Liquid</a>. (Don't worry if these terms don't make sense yet. The point is that we can customize things however we want.)</p>
 
 	<p>I think this has gone on long enough. In the next installment, we'll start creating some actual site pages and pieces. See you then!</p>
 </section>

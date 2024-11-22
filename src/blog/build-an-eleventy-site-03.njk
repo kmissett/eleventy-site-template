@@ -1,0 +1,132 @@
+---
+pageTitle: "Building an Eleventy Site, Part 3: Frontmatter and Conditional Logic"
+date: 2024-11-20 12:00:00
+tags: ["11ty"]
+excerpt: "In part 3, we use frontmatter and conditional logic to customize our pages."
+series: "building-an-eleventy-site"
+draft: false
+hasCodeBlock: true
+---
+<section aria-label="Intro">
+<p>Hello, and welcome to part 3 of our series, Building an Eleventy Site! We already have a couple of pages,  and we've organized our build process with partials and layouts. But at the moment, we can only change things on individual pages that are in the main content area. That's a problem, since we need to be able to make other parts page-specific. For example, the browser tab should give the title of the exact page we're on, but right now, they all say the same thing. Also, eventually I want to include a hero section in the layout that we customize in our individual files.</p>
+</section>
+<section aria-labelledby="set-frontmatter-variables">
+	<h2 id="set-frontmatter-variables">Frontmatter Variables</h2>
+<p>To solve this, set variables in our page frontmatter to communicate with our layout. Here's how our layout and index files looked at the end of our previous post:</p>
+
+<div class="code-block" aria-labelledby="codeblock-01">
+	<header class="code-block-header" id="codeblock-01">_includes/layouts/base.njk</header>
+	{% highlight "html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eleventy Site</title>
+</head>
+<body>
+	{% raw %}{% include "partials/site-header.njk" %}{% endraw %}
+
+	<main class="site-main">
+		{% raw %}{{ content | safe }}{% endraw %}
+	</main>
+	{% raw %}
+	{% include "partials/site-footer.njk" %}
+	{% include "partials/site-sidebar.njk" %}
+	{% endraw %}
+</body>
+</html>
+	{% endhighlight %}
+</div>
+
+	<div class="code-block" aria-labelledby="codeblock-02">
+	<header class="code-block-header" id="codeblock-02">index.njk</header>
+	{% highlight "html" %}
+---
+layout: "layouts/base.njk"
+---
+
+<p>The main content of our site goes here.</p>
+	{% endhighlight %}
+</div>
+
+<p>Let's define some new variables:</p>
+
+<div class="code-block" aria-labelledby="codeblock-03">
+<header class="code-block-header" id="codeblock-03">index.njk</header>
+{% highlight "html" %}
+---
+layout: "layouts/base.njk"
+pageTitle: "Home"
+pageID: "home"
+description: "The home page of our Eleventy site."
+---
+{% endhighlight %}
+</div>
+
+<p>Now we can reference them in our layout, using the double-curly-bracket notation:</p>
+
+<div class="code-block" aria-labelledby="codeblock-04">
+	<header class="code-block-header" id="codeblock-04">_includes/layouts/base.njk</header>
+	{% highlight "html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="{% raw %}{{description}}{% endraw %}">
+	<title>{% raw %}{{pageTitle}}{% endraw %} - Eleventy Site</title>
+</head>
+<body>
+	{% raw %}{% include "partials/site-header.njk" %}{% endraw %}
+
+	<main class="site-main {% raw %}{{pageID}}{% endraw %}-main">
+		{% raw %}{{ content | safe }}{% endraw %}
+	</main>
+	{% raw %}
+	{% include "partials/site-footer.njk" %}
+	{% include "partials/site-sidebar.njk" %}
+	{% endraw %}
+</body>
+</html>
+	{% endhighlight %}
+</div>
+
+<p>Now when we build the site, those variables will be replaced by what we put in the frontmatter! We need to update them in the <code>about.njk</code> file too:</p>
+
+<div class="code-block" aria-labelledby="codeblock-05">
+<header class="code-block-header" id="codeblock-05">about.njk</header>
+{% highlight "html" %}
+---
+layout: "layouts/base.njk"
+pageTitle: "About"
+pageID: "about"
+description: "The about page of our Eleventy site."
+---
+{% endhighlight %}
+</div>
+
+<p>These are variables in the traditional, programming sense. That means we can use them in our layout as part of conditional statements -- that is, we can check whether they are defined, or whether they match some particular value, and change the behavior of the template as a result.</p>
+</section>
+
+<section aria-labelledby="conditional-logic">
+	<h2 id="conditional-logic" tabindex="0">Adding Conditional Logic</h2>
+
+<p>Back in <code>base.njk</code>, change the <code>title</code> to read:</p>
+
+<div class="code-block" aria-labelledby="codeblock-06">
+<header class="code-block-header" id="codeblock-06">_includes/layouts/base.njk</header>
+{% highlight "html" %}
+<title>{% raw %}{% if pageID !== "home" %}{{pageTitle}} - {% endif %}{% endraw %}Eleventy Site</title>
+{% endhighlight %}
+</div>
+
+<p>What this does is check to see whether the page we're currently on is our home page. If it isn't, then it will print the page title in our browser tab. If it is, then we leave that part out, and default to the overall site title. Try rebuilding the pages with the <code>npx</code> command, and you'll see the difference.</p>
+</section>
+
+<section aria-labelledby="final-thoughts">
+	<h2 id="final-thoughts" tabindex="0">Wrapping up</h2>
+	<p>So, now we've started to fix the problem! We have a much more robust system for creating pages without duplicating a lot of work. There is another problem, though. Every time we make a change, we have to rebuild the site and refresh the browser to see it. Next time, I want to start by fixing that, and then get our nav menu working.</p>
+
+	<p>Until then, happy coding!</p>
+</section>

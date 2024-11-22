@@ -26,9 +26,8 @@
     {% if heroImage %}<img class="hero-image" src="images/{{heroImage}}" alt="{{heroImageDescription}}" />{% endif %}
 </section>
 
-{% block main %}
 {{ content | safe }}
-{% endblock %}
+
 </main>
 
 {% include "partials/site-footer.njk" %}

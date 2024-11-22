@@ -1,0 +1,156 @@
+---
+pageTitle: "Building an Eleventy Site, Part 2: Pages, Partials, and Layouts"
+date: 2024-11-20 12:00:00
+tags: ["11ty"]
+excerpt: "Continuing our series about building an Eleventy site, we create our first pages, then define partials and layouts."
+series: "building-an-eleventy-site"
+draft: false
+hasCodeBlock: true
+---
+<section aria-label="Intro">
+<p>Welcome back! <a href="/blog/build-an-eleventy-site-01"></a>Last time,</a> we began our setup of our <a href="https://www.11ty.dev/">Eleventy</a> 3.0 site. Where we left off, though, wasn't too satisfying. Today we'll make our first actual pages! Then we'll extract pieces into components, which Eleventy calls "partials," and collect them into templates called layouts. </p>
+</section>
+<section aria-labelledby="create-home-page">
+	<h2 id="create-home-page" tabindex="0">Our first pages</h2>
+
+	<p>In our source folder (your root directory by default, but I prefer <code>src</code>), create a new file called <code>index.njk</code>. In the build step, Eleventy will turn this into our site home page. This will become our site home page. Note that I'm using <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> here, but you could use Markdown, or Liquid, or straight <abbr>HTML</abbr>, among others.</p>
+
+	<p>From here, go to your code editor of choice (I use <a href="https://code.visualstudio.com/">Visual Studio Code</a>), and begin to write your HTML structure. Here's a very basic version:</p>
+	
+	<div class="code-block" aria-labelledby="codeblock-01">
+		<header class="code-block-header" id="codeblock-01">index.njk</header>
+	{% highlight "html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eleventy Site</title>
+</head>
+<body>
+	<header class="site-header">
+		<h1><a class="site-title" href="/">Eleventy Site</a></h1>
+		<nav class="site-nav">Site nav goes here</nav>
+	</header>
+	<main class="site-main">
+		<p>The main content of our site goes here.</p>
+	</main>
+	<footer class="site-footer">
+		<p>The site footer goes here.</p>
+	</footer>
+	<aside class="site-sidebar">
+		<p>Our site sidebar goes here.</p>
+	</aside>
+</body>
+</html>
+	{% endhighlight %}
+	</div>
+
+	<p>We're going to adjust this a lot, of course, but let's see Eleventy in action. Open the root directory in the terminal (which you can do inside VS Code), and run the following command:</p>
+
+	<div class="code-block" aria-labelledby="codeblock-02">
+		<header class="code-block-header" id="codeblock-02">eleventy-site/</header>
+	{% highlight "powershell" %}
+	npx @11ty/eleventy
+	{% endhighlight %}
+	</div>
+
+	<p>In maybe a quarter of a second, the <code>_site</code> folder will pop up in your root directory. Inside, you'll find the <code>index.html</code> file we just generated! Load it in the browser, and you should see something like this:</p>
+
+	<img src="images/build-an-eleventy-site-02 01.png" alt="Screenshot of our basic homepage, without any real content or styling" />
+
+	<p>Not much to look at yet, I'll admit, but the building blocks are there!</p>
+
+	<p>Let's do it again! Create a new file, called <code>about.njk</code>, and copy the contents of our <code>index.njk</code> file into that. (We'll customize everything later.) When you run the <code>npx</code> command again, though, something different happens. In our <code>_site</code> folder, there's a folder named <code>about</code>, with an <code>index.html</code> file inside. This is what Eleventy does when we name our file anything other than <code>index</code>.</p>
+
+	<p>If we continue creating new pages like this, we will keep rewriting pieces of the pages that are the same on all of them. Plus, it would make things much harder to update, since any changes would have to get made on every page on our site. Luckily, we can leverage tools in Eleventy to avoid all that.</p>
+</section>
+<section aria-labelledby="our-first-partials">
+	<h2 id="our-first-partials" tabindex="0">Our First Partials</h2>
+	<p>Inside our <code>_includes/partials</code> folder, make the following files:</p>
+	<ul>
+		<li><code>site-header.njk</code></li>
+		<li><code>site-footer.njk</code></li>
+		<li><code>site-sidebar.njk</code></li>
+	</ul>
+	<p>Now, go back to <code>index.html</code>, and copy the header code into <code>site-header</code>. In its place, put the following:</p>
+
+		<div class="code-block" aria-label="Nunjucks include for site-header">
+	{% highlight "njk" %}
+		{% raw %}
+		{% include "partials/site-header.njk" %}
+		{% endraw %}
+	{% endhighlight %}
+	</div>
+
+	<p>Do the same for the remaining pieces; your <code>index.njk</code> file should look like this:</p>
+
+<div class="code-block" aria-labelledby="codeblock-03">
+		<header class="code-block-header" id="codeblock-03">index.njk</header>
+	{% highlight "html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Eleventy Site</title>
+</head>
+<body>
+	{% raw %}
+	{% include "partials/site-header.njk" %}
+	{% endraw %}
+	<main class="site-main">
+		<p>The main content of our site goes here.</p>
+	</main>
+	{% raw %}
+	{% include "partials/site-footer.njk" %}
+	{% include "partials/site-sidebar.njk" %}
+	{% endraw %}
+</body>
+</html>
+	{% endhighlight %}
+	</div>
+
+<p>When you run the <code>npx</code> command again, everything should be exactly the same. But now we can update those partials independently, and use them on every page!</p>
+
+<p>What's more, we can nest partials inside other partials! Extract the <code>nav</code> from <code>site-header.njk</code> and put it in its own file. I actually like to put this one in the <code>components</code> subfolder, as we'll see how we can use this same nav in multiple places.</p>
+</section>
+
+<section aria-labelledby="create-new-layout">
+	<h2 id="create-new-layout" tabindex="0">Create a Layout</h2>
+
+<p>Now that we've tidied up <code>index.njk</code>, we could do the same thing to <code>about.njk</code>, and so on, but there's another, better way. We can take this partials idea up a level and create a template for all our pages. We can then apply the one, larger structure to everything. On each page, then, we can focus just on the specific content for that page. This is the idea behind Eleventy layouts.</p>
+
+<p>Copy everything from <code>index.njk</code> into a new file, called <code>_includes/layouts/base.njk</code>. Next, replace the paragraph inside <code>site-main</code> with the following:</p>
+
+	<div class="code-block" aria-label="Main content slot">
+	{% highlight "njk" %}
+		{% raw %}
+		{{ content | safe }}
+		{% endraw %}
+	{% endhighlight %}
+	</div>
+
+<p>This is a slot that tells Eleventy that, in any file in which we apply this layout, the content of that file will go here. The pipe symbol <code>|</code> and the word <code>safe</code> tell Eleventy to trust that content is not malicious. (Without that, Eleventy will prevent it from rendering as <abbr>HTML</abbr> code.)</p>
+
+<p>Now go back to <code>index.njk</code>, and erase everything except for the one paragraph inside <code>site-main</code>.</p> Then, up at the top, write the following (be sure to include those two rows of dashes):
+
+<div class="code-block" aria-labelledby="codeblock-04">
+		<header class="code-block-header" id="codeblock-04">index.njk</header>
+	{% highlight "njk" %}
+---
+layout: "layouts/base.njk"
+---
+	{% endhighlight %}
+
+<p>This is what Eleventy calls frontmatter. Anything between those lines of dashes tells Eleventy how to render the page. The part we wrote links the layout we just created to this file. When we build the page again, nothing should be different.</p>
+
+<p>Next, do the same thing to the About page we made. Try putting different content in both files, so you can see the difference when you switch.</p>
+</section>
+
+<section aria-labelledby="final-thoughts">
+	<h2 id="final-thoughts">Some final thoughts</h2>
+
+	<p>This is just the beginning. We can have multiple independent layouts, and even extend one layout from another. Also, there's a lot more that our frontmatter can do, which we'll see more in our next post. See you there!</p>
+
+</section>
