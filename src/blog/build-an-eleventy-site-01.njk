@@ -9,8 +9,9 @@ hasCodeBlock: true
 ---
 <section aria-label="Intro">
 <p>Hello, and welcome to the first post in a series, detailing how I built this site in <a href="https://www.11ty.dev/">Eleventy</a> 3.0. While there are already amazing articles and tutorials out there, I wanted to add my voice to the chorus. Also, I wanted to collect some of the best tips I've learned (and I'll do my best to give credit to those who inspired me).</p>
-
-<h2 id="why-eleventy">Why Eleventy?</h2>
+</section>
+<section aria-labelledby="why-eleventy">
+<h2 id="why-eleventy" tabindex="0">Why Eleventy?</h2>
 
 <p>There are a lot of different ways to write and structure websites nowadays. What you choose depends on the size of the site and the functionality you want. <a href="https://www.youtube.com/watch?v=p02AIAoImzU">This video</a> by Kyle at <a href="https://www.youtube.com/@WebDevSimplified/videos">Web Dev Simplified</a> is a great discussion of the differences. Kyle does come down more on the side of <abbr>SSRs</abbr> (server-side renderers). But for what I'm doing here, I prefer <a href="https://developer.mozilla.org/en-US/docs/Glossary/SSG">static site generators</a> (<abbr>SSGs</abbr>) like Eleventy. The pages on this site will rarely change, so we don't need to build them dynamically at request time. Also, this site will still be fast on devices with slow connections or limited data. Finally, I don't love that tools like <a href="https://react.dev/">React</a> require JavaScript just to build the basic HTML code of the page. If the user has turned off JavaScript in their browser, then pages will not load at all. </p>
 
