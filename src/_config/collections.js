@@ -5,7 +5,7 @@ const getAllPosts = collection => {
 const getPublicPosts = collection => {
 	const now = new Date()
 	const posts = collection.getFilteredByGlob("./src/blog/*")
-	return posts.filter(post => !post.data.draft && post.data.date < now)
+	return posts.filter(post => post.data.draft == "false" && post.data.date < now)
 }
 
 const getTagsList = collection => {

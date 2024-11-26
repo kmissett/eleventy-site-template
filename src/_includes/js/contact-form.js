@@ -1,7 +1,7 @@
 const contactForm = document.querySelector('.contact-form')
 
 // TODO: get .env to work with this
-contactForm.action = "123"
+contactForm.action = ""
 contactForm.method = "POST"
 
 const submittedName = contactForm.querySelector('#name')
