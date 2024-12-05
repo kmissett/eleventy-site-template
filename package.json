@@ -15,7 +15,7 @@
   "license": "ISC",
   "description": "",
   "type": "module",
-  "devDependencies": {
+  "dependencies": {
     "@11ty/eleventy": "^3.0.0",
     "@11ty/eleventy-plugin-syntaxhighlight": "^5.0.0",
     "cross-env": "^7.0.3",
