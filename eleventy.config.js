@@ -22,7 +22,6 @@ export default async function(eleventyConfig) {
 
 	// collections
 	eleventyConfig.addCollection("posts", collections.getAllPosts)
-	eleventyConfig.addCollection("publicPosts", collections.getPublicPosts)
 	eleventyConfig.addCollection("tagsList", collections.getTagsList)
 
 	// filters

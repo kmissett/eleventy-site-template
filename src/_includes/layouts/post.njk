@@ -1,8 +1,5 @@
 {% extends "layouts/base.njk" %}
 {% set comma = joiner() %}
-{% set previousPost = collections.publicPosts | getPreviousCollectionItem %}
-{% set nextPost = collections.publicPosts | getNextCollectionItem %}
-
 
 {% block main %}
 <article class="post" aria-labelledby="page-title">
@@ -13,14 +10,7 @@
     </header>
     {{content | safe }}
     <footer class="post-footer">
-        {% if previousPost or nextPost %}
-        <nav class="post-navigation">
-            <ul>
-                {% if previousPost %}<li>Previous: <a href="{{ previousPost.url }}">{{ previousPost.data.pageTitle }}</a></li>{% endif %}
-                {% if nextPost %}<li>Next: <a href="{{ nextPost.url }}">{{ nextPost.data.pageTitle }}</a></li>{% endif %}
-            </ul>
-        </nav>
-        {% endif %}
+        
     </footer>
 </article>
 {% endblock %}

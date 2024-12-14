@@ -1,11 +1,18 @@
+
+/*
 const getAllPosts = collection => {
-	return collection.getFilteredByGlob("./src/blog/*")
-}
+	return collection.getFilteredByGlob("./src/blog/posts/*")
+} 
 
 const getPublicPosts = collection => {
 	const now = new Date()
-	const posts = collection.getFilteredByGlob("./src/blog/*")
+	const posts = collection.getFilteredByGlob("./src/blog/posts/*")
 	return posts.filter(post => post.data.draft == "false" && post.data.date < now)
+}
+*/
+
+const getAllPosts = collection => {
+	return collection.getFilteredByTag("post")
 }
 
 const getTagsList = collection => {
@@ -18,4 +25,4 @@ const getTagsList = collection => {
 	return Array.from(tagsSet).sort()
 }
 
-export default {getAllPosts, getPublicPosts, getTagsList}
+export default {getAllPosts, getTagsList}

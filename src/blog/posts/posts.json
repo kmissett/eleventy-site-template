@@ -1,5 +1,5 @@
 {
 	"layout": "layouts/post.njk",
 	"pageID": "post",
-	"contentType": "post"
+	"tags": "post"
 }
