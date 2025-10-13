@@ -37,13 +37,27 @@
     --font-primary: "Open Sans", sans-serif;
     --font-code: "Fira Code", monospace;
 
-    --fs: clamp(1rem, 1rem + 4vmin, 1.5rem);                /* 16-24px */
-    --fs-lg: clamp(1.5rem, 1.5rem + 4vmin, 2rem);           /* 24-32px */
-    --fs-xl: clamp(2rem, 2rem + 4vmin, 2.5rem);             /* 32-40px */
-    --fs-xxl: clamp(3rem, 3rem + 4vmin, 4rem);              /* 40-48px */
-    --fs-huge: clamp(5rem, 4rem + 4vmin, 6rem);             /* 80-96px */
-    --fs-sm: clamp(.875rem, .875rem + 4vmin, 1.125rem);     /* 14-18px */
-    --fs-xs: clamp(.75rem, .75rem + 4vmin, 1rem);           /* 12-16px */
+
+/* 
+    --fs: clamp(1rem, 1rem + 4vmin, 1.5rem);                // 16-24px
+    --fs-lg: clamp(1.5rem, 1.5rem + 4vmin, 2rem);           // 24-32px
+    --fs-xl: clamp(2rem, 2rem + 4vmin, 2.5rem);             // 32-40px
+    --fs-xxl: clamp(3rem, 3rem + 4vmin, 4rem);              // 40-48px
+    --fs-huge: clamp(5rem, 4rem + 4vmin, 6rem);             // 80-96px
+    --fs-sm: clamp(.875rem, .875rem + 4vmin, 1.125rem);     // 14-18px
+    --fs-xs: clamp(.75rem, .75rem + 4vmin, 1rem);           // 12-16px
+*/
+/* 
+
+@link https://utopia.fyi/type/calculator?c=320,16,1.25,960,24,1.333,5,2,&s=0.75|0.5|0.25,1.5|2|3|4|6,s-l&g=s,l,xl,12 */
+    --fs-xs: clamp(0.8rem, 0.7779rem + 0.1104cqi, 0.8442rem);
+    --fs-sm: clamp(1rem, 0.9374rem + 0.3132cqi, 1.1253rem);
+    --fs: clamp(1.25rem, 1.125rem + 0.625cqi, 1.5rem);
+    --fs-lg: clamp(1.5625rem, 1.344rem + 1.0925cqi, 1.9995rem);
+    --fs-xl: clamp(1.9531rem, 1.597rem + 1.7805cqi, 2.6653rem);
+    --fs-xxl: clamp(2.4414rem, 1.8857rem + 2.7787cqi, 3.5529rem);
+    --fs-3xl: clamp(3.0518rem, 2.2096rem + 4.2106cqi, 4.736rem);
+    --fs-4xl: clamp(3.8147rem, 2.5655rem + 6.246cqi, 6.3131rem);
 
     --fw-thin: 200;
     --fw-light: 300;
