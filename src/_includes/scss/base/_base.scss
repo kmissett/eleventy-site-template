@@ -33,6 +33,8 @@ h1,h2,h3,h4,h5,h6 {
     text-wrap: balance;
 }
 
+h2,h3, h4, h5, h6 {padding-block-end: 1lh;}
+
 h1        {font-size: var(--fs-4xl);}
 h2        {font-size: var(--fs-xxl);}
 h3        {font-size: var(--fs-xl);}
@@ -45,7 +47,7 @@ cite, i, em {font-style: italic;}
 
 cite em {font-weight: var(--fw-bold);}
 
-p + p { margin-block-start: 1em; }
+p + p { margin-block-start: 1lh; }
 
 input, textarea {font: inherit;}
 
@@ -93,6 +95,13 @@ img, video {
     max-inline-size: 100%;
 }
 
+/***** Inline code *****/
+code:not([class*="language-"]) {
+    display: inline-block;
+    font-size: var(--fs-sm); 
+    background-color: hsl(0 0 20%);
+    padding-inline: 0.5ch;
+}
 
 
 /***** Javascript Utility Classes *****/
