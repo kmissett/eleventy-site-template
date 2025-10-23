@@ -68,6 +68,11 @@ src
 	{% highlight "js" %}
 export default async function(eleventyConfig) {
 	// general config
+
+	// passthrough copies
+	eleventyConfig.addPassthroughCopy("src/images")
+	eleventyConfig.addPassthroughCopy("src/fonts")
+	
 	return {
 
 		// Control which files Eleventy will process
@@ -92,6 +97,8 @@ export default async function(eleventyConfig) {
 	</div>
 
 	<p>There are some opinionated choices in here. For example, Eleventy's default input directory is the root, but I prefer using a <code>src</code> folder. This keeps the input and output files more separate. I'm also more of a <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a> fan, so I'm changing the default templating engine from <a href="https://shopify.github.io/liquid/">Liquid</a>. (Don't worry if these terms don't make sense yet. The point is that we can customize things however we want.)</p>
+
+	<p>I'm also telling Eleventy to copy the <code>fonts</code> and <code>images</code>folders from our source folder to the <code>_site</code> directory. Granted, having two copies of our fonts and images (and anything else we add later, like videos or files) will make the project take up more storage space locally, but it also means that we can control everything directly from <code>src</code>. Furthermore, eventually I'm going to upload this project to <a href="https://github.com">GitHub</a>, so having those folders in <code>src</code> makes the uploading easier.</p>
 
 	<p>I think this has gone on long enough. In the next installment, we'll start creating some actual site pages and pieces. See you then!</p>
 </section>

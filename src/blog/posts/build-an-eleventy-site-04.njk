@@ -1,0 +1,127 @@
+---
+pageTitle: "Building an Eleventy Site, Part 4: Live Reloading and CSS"
+date: 2025-10-17 12:00:00
+tags: ["11ty"]
+excerpt: "In part 4, we enable live reloading of our page, and write some basic CSS."
+series: "building-an-eleventy-site"
+draft: false
+hasCodeBlock: true
+---
+<section aria-label="Intro">
+<p>Hello, and welcome to part 4 of our series, Building an Eleventy Site! In our previous installments (episodes?), every time we made a change to our site, we had to rebuild everything manually, and then reload our page. This is OK, so far as it goes, but it's a huge hassle to keep doing that. It breaks our flow, and slows our progress.</p>
+<p>Fortunately, Eleventy (more specifically, npm) allows us to set up a different script, which while it's running will watch our files for changes and reload our pages in the browser. That way, we don't have to do all that <code>"npx run build"</code> stuff every time.</p>
+<p>Before we get to that, though, I first want to set up some basic CSS files. I tend to prefer to use <a href="https://sass-lang.com/">Sass</a>, though mostly because it makes it easy to organize my styles into separate file structures. Someday I might switch to something like <a href="https://postcss.org/">PostCSS</a>, or even write a custom script myself, but this is the easiest way for me at the moment.</p>
+</section>
+<section aria-labelledby="setting-up-sass">
+	<h2 id="setting-up-sass">Setting Up Sass</h2>
+<p>We're going to venture into the terminal once again, and install two new npm modules:</p>
+
+<div class="code-block" aria-labelledby="codeblock-01">
+	<header class="code-block-header" id="codeblock-01" tabindex="0">Terminal</header>
+	{% highlight "powershell" %}
+npm install sass npm-run-all --save-dev
+	{% endhighlight %}
+</div>
+
+<p>The first is <code>sass</code>, which you can read about at its <a href="https://www.npmjs.com/package/sass">info page</a>. The other, which we'll need in a little bit, is <code>npm-run-all</code> (here's its <a href="https://www.npmjs.com/package/npm-run-all">info page</a>), which allows us to run multiple scripts in parallel. The bit at the end, <code>--save-dev</code>, is an instruction to let npm know that these modules are tools that are meant to help us in the development process, but aren't required for the site in production.</p>
+
+<p>Now, open up the <code>package.json</code> file. I don't think we've gone in here yet, so this is pretty exciting. This file shows the list of our installed modules, and it's where we can write scripts to automate certain tasks (like, for instance, building our Sass files, or automatically rebuilding our site when we save changes). Up in the <code>"scripts"</code> section, type in the following:</p>
+
+<div class="code-block" aria-labelledby="codeblock-02">
+	<header class="code-block-header" id="codeblock-02" tabindex="0">package.json</header>
+	{% highlight "json" %}
+"build:eleventy": "eleventy",
+"watch:eleventy": "eleventy --incremental --serve",
+"build:sass": "sass src/_includes/scss:_site",
+"watch:sass": "sass --watch src/_includes/scss:_site",
+"build": "npm-run-all build:*",
+"start": "npm-run-all build:sass --parallel watch:*"
+	{% endhighlight %}
+</div>
+
+<p>Let's run through what all this means: Each of these lines represents a script we can run in the terminal, using the command <code>npm run</code> plus the script name. So, for instance, if you run <code>npm run build:eleventy</code>, that will, unsurprisingly, build your site. The <code>watch:eleventy</code> script is the one that enables live reloading, with the flag <code>--serve</code>. The additional flag <code>--incremental</code> tells npm only to rebuild files that have actually changed, which saves a lot of time, especially when sites get really big.</p>
+<p>The scripts <code>build:sass</code> and <code>watch:sass</code> do basically what they say they do: build your SCSS files into CSS, or watch and live-reload whenever those files change. The part that says <code>src/_includes/scss:_site</code> tells the script to watch anything in the <code>src/_includes/scss</code> folder, which we made a while back but haven't used yet, and write the output to the <code>_site</code> root folder.</p>
+<p>Lastly, those final two, <code>build</code> and <code>start</code>, are the ones we'll be using. The first just builds our Eleventy site, and processes the SCSS files. The second does that, and then starts watching for changes. Try that one now: In the terminal, type <code>npm run start</code>. The build will run, but the command won't stop. It's watching our files now; in fact, it says so in the terminal:</p>
+
+<div class="code-block" aria-labelledby="codeblock-03">
+	<header class="code-block-header" id="codeblock-03" tabindex="0">Terminal</header>
+	{% highlight "powershell" %}
+[11ty] Watching…
+[11ty] Server at http://localhost:8080/
+	{% endhighlight %}
+</div>
+
+<p>If you follow that link, it will open up our site in the default browser. Then, when we make changes, the site will automatically rebuild, and the browser will reload, so long as the script is running! Note that this is why we needed <code>npm-run-all</code>. It allows us to run those separate build or watch scripts all at once, in parallel!</p>
+<p>To stop the script, press <code>Ctrl+C</code> (<code>⌘+C</code> on a Mac). Try that now.</p>
+</section>
+
+<section aria-labelledby="adding-css">
+	<h2 id="adding-css" tabindex="0">Adding CSS</h2>
+	<p>I want to add some basic CSS to the page, but we'll cover more of this later. For now, I just want to show you how I set up my CSS file structure, and link it to our pages.</p>
+
+	<p>I tend to organize my CSS into different files, and merge them all into one file. That way, it makes it easier for me to find things. So, in my scss folder, I create the following folder and file structure, at least to start:</p>
+
+<div class="code-block" aria-labelledby="codeblock-04">
+		<header class="code-block-header" id="codeblock-04">Folder structure</header>
+	{% highlight "powershell" %}
+scss
+  | base
+		_accessibility.scss
+		_base.scss
+		_vars.scss
+  | components
+  | layout
+		_site-footer.scss
+		_site-header.scss
+		_site-main.scss
+		_site-sidebar.scss
+  | pages
+  styles.scss
+	{% endhighlight %}
+	</div>
+	
+	<p>Notice that all the files inside the subfolders begin with a <code>_</code> symbol. That tells the Sass compiler not to make them separate files. I then add the following to the main styles.scss file:</p>
+
+	<div class="code-block" aria-labelledby="codeblock-05">
+		<header class="code-block-header" id="codeblock-05">styles.scss</header>
+	{% highlight "css" %}
+@use "base/vars";
+@use "base/base";
+@use "base/accessibility";
+
+@use "layout/site-header";
+@use "layout/site-main";
+@use "layout/site-sidebar";
+@use "layout/site-footer";
+	{% endhighlight %}
+	</div>
+
+<p>Now, anything I write in those files will be added here, in the order listed above. When I add new files to my scss folder, I add references here too.</p>
+
+<p>I'm going to add some initial CSS to these, just to make things look a little nicer; that said, I don't think I'll put the full contents in this post, as it's already getting pretty long. I will, however, create a Github repository that contains everything we've done so far. From here on out, I'll make regular updates to that repository when I add new installments. Every time I publish an article, I'll push a new commit to the repository whose message will be the article name; that way, you'll be able to see everything that's changing as we go.</p>
+</section>
+
+<section aria-labelledby="linking-our-stylesheet">
+	<h2 id="linking-our-stylesheet" tabindex="0">Linking our stylesheet</h2>
+	<p>Now that we've added some basic styling, we want that to show up on the actual site. This requires linking the CSS to the page in some way. Eleventy allows us to do that in many ways. My preference is to go the old-school <code>link</code> route up in the head of the document. So, in the <code>base</code> layout, I add the following line, right below the <code>title</code> tag:
+
+	<div class="code-block" aria-labelledby="codeblock-06">
+	<header class="code-block-header" id="codeblock-06">base.njk</header>
+	{% highlight "njk" %}
+<link rel="stylesheet" href="{{"/styles.css" | url}}">
+	{% endhighlight %}
+	</div>
+
+	<p>The <code>url</code> filter after the filename here tells Eleventy (actually, Nunjucks) that this is a URL, and will make sure that it's processed appropriately.</p>
+	
+	<p>Note that you could instead inject the CSS directly between some <code>style</code> tags, using the same syntax we use for the partials. The reason I'm not doing that now is that it both increases the size of every file that uses our layout template, and requires rebuilding every file with any change to the CSS. That said, it's a great option for critical CSS, especially if you have lots of secondary styling; you could even create multiple CSS files and load them conditionally on pages that have certain features (for instance, only load <code>form</code> styles on your Contact page).</p>
+</section>
+<section aria-labelledby="wrapping-up">
+	<h2 id="wrapping-up" tabindex="0">Wrapping up</h2>
+	<p>Here's a screenshot of the site as it stands now, with some basic CSS applied. Note that I also downloaded and installed some fonts in the <code>fonts</code> folder.</p>
+
+	{# <img src="images/build-an-eleventy-site-04 01.png" alt="Screenshot of our basic homepage, with some basic CSS styling applied" /> #}
+
+	<p>Next time, I want to start working on our <code>nav</code> menu, which will let us start talking about site data. Until then, happy coding!</p>
+</section>
+

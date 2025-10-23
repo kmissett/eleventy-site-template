@@ -17,7 +17,7 @@ export default async function(eleventyConfig) {
 	})
 
 	// add watch targets
-	eleventyConfig.addWatchTarget("./src/_includes/scss")
+	// eleventyConfig.addWatchTarget("./src/_includes/scss")
 	eleventyConfig.addWatchTarget("./src/_includes/js")
 
 	// collections
